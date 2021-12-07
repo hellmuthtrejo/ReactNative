@@ -3,6 +3,7 @@ import { Funciones } from './typescript/Funciones';
 import ObjetosLiterales from './typescript/ObjetosLiterales';
 import { TiposBasicos } from './typescript/TiposBasicos';
 import { ContadorConHook } from './components/ContadorConHook';
+import { Login } from './components/Login';
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
         {/* <ObjetosLiterales /> */}
         {/* <Funciones /> */}
         {/* <Contador /> */}
-        <ContadorConHook />
+        {/* <ContadorConHook /> */}
+        <Login />
     </div>
   );
 }
