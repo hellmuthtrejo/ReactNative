@@ -7,7 +7,7 @@ const App = () => {
         <h1>Introduccion a TypeScript React</h1>
         <hr />
         {/* <TiposBasicos /> */}
-        <ObjetosLiterales />
+        {/* <ObjetosLiterales /> */}
     </div>
   );
 }
