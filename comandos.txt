@@ -1,0 +1,5 @@
+npx react-native init MyAwesomeProject --template react-native-template-typescript
+
+adb devices
+
+npx react-native run-android
