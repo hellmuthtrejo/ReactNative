@@ -14,9 +14,14 @@ const initialState: AuthState = {
     nombre: '',
 }
 
-type AuthAction = {
-    type: 'logout'
+type LoginPayload = {
+    username: string, 
+    nombre: string
 }
+
+type AuthAction = 
+| { type: 'logout' }
+| { type: 'login', payload: LoginPayload };
 
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     switch (action.type) {
@@ -27,6 +32,15 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
                 username: '',
                 nombre: ''
             }
+        
+        case 'login':
+            const { nombre, username } = action.payload;
+            return {
+                validando: false,
+                token: 'abc123',
+                nombre,
+                username,
+            }
 
         default:
             return state;
@@ -36,13 +50,27 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 export const Login = () => {
     
     // const [state, dispatch] = useReducer(authReducer, initialState);
-    const [{ validando, token, nombre }, dispatch] = useReducer(authReducer, initialState);
+    const [{ validando, token, nombre, username }, dispatch] = useReducer(authReducer, initialState);
 
     useEffect(() => {
         setTimeout(() => {
             dispatch({ type: 'logout'});
         }, 1500);
     }, []);
+
+    const login = () => {
+        dispatch({ 
+            type: 'login', 
+            payload: {
+                nombre: 'Hellmuth',
+                username: 'htrejo'
+            } 
+        });
+    }
+
+    const logout = () => {
+        dispatch({ type: 'logout' });
+    }
 
     if( validando ) {
         return (
@@ -63,6 +91,7 @@ export const Login = () => {
                     ?  
                     <div className="alert alert-success">
                         Autenticado como : { nombre }
+                        UserName : { username }
                     </div> 
                     :
                     <div className="alert alert-danger">
@@ -77,6 +106,7 @@ export const Login = () => {
                     (
                         <button
                             className="btn btn-danger"
+                            onClick={ logout }
                         >
                         Logout
                         </button>
@@ -85,6 +115,7 @@ export const Login = () => {
                     (
                         <button
                             className="btn btn-primary"
+                            onClick={ login }
                         >
                             Login
                         </button>
